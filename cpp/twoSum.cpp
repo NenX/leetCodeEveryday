@@ -13,37 +13,41 @@
 #include <iostream>
 using namespace std;
 
-vector<int> towSum(vector<int> &nums, int target)
+class Solution
 {
-
-    unordered_map<int, int> m;
-    vector<int> result;
-    size_t len = nums.size();
-
-    for (int i = 0; i < len; i++)
+public:
+    vector<int> twoSum(vector<int> &nums, int target)
     {
-        int n = nums[i];
-        int diff = target - n;
 
-        if (m.find(n) == m.end())
+        unordered_map<int, int> m;
+        vector<int> result;
+        size_t len = nums.size();
+
+        for (int i = 0; i < len; i++)
         {
-            m.insert({diff, i});
+            int n = nums[i];
+            int diff = target - n;
+
+            if (m.find(n) == m.end())
+            {
+                m.insert({diff, i});
+            }
+            else
+            {
+                result.push_back((m[n]));
+                result.push_back(i);
+                break;
+            }
         }
-        else
-        {
-            result.push_back((m[n]));
-            result.push_back(i);
-            break;
-        }
+        return result;
     }
-    return result;
-}
+};
 
 int main()
 {
     vector<int> nums{2, 7, 11, 15};
     int target = 9;
-    vector<int> result = towSum(nums, target);
-
+    Solution *s;
+    vector<int> result = s->twoSum(nums, target);
     return 0;
 }
